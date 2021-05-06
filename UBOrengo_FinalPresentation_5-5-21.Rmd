@@ -42,7 +42,7 @@ as.data.frame(amazon_dataset)
 str(amazon_dataset)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed_chunk_3.png"  height="696" width="397">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed_chunk_3.png"  height="696" width="397">
 
 ## CLEAN TITLES // DROP NAs PRODUCT CATEGORY 1
 
@@ -75,7 +75,7 @@ prod_cats <- unique(amazon_dataset[c("Product_Category_1")])
 view(prod_cats)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed_chunk_4.png"  height="500" width="200">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed_chunk_4.png"  height="500" width="200">
 
 ## TABLE OF PRODUCT CATEGORIES
 
@@ -102,7 +102,9 @@ product_mean_count <- product_mean_count %>%
 view(product_mean_count)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed_chunk_5.png"  height="500" width="200">
+## TABLE OF PRODUCT CATEGORIES
+
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed_chunk_5.png"  height="677" width="452">
 
 ## TOTAL OBSERVATIONS OF DATASET
 
@@ -113,15 +115,6 @@ print(total_obs)
 
 [1] 29935
 
-## CHOOSING PRODUCT CATEGORIES I WISH TO EXPLORE FURTHER BASED ON PRODUCT COUNT/MEAN
-
-```
-desired_cats <- product_mean_count[1:9,]
-desired_cats_list <- subset(desired_cats, select = -c(average_price,product_count))
-view(desired_cats)
-```
-
-<img src="EDA_STATS_HTML_files\figure-html\unnamed_chunk_5.png"  height="500" width="200">
 
 ## TOTAL OBSERVATIONS VS OBSERVATIONS FOR TOP 9 CATEGORIES
 
@@ -152,7 +145,7 @@ colnames(totals_cat_top_9) <- c("Product Category", "Percentage", "Mean, Product
 print(totals_cat_top_9)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed_chunk_5.png"  height="500" width="200">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed_chunk_7.png"  height="232" width="1197">
 
 ## CREATING DF FOR EACH PRODUCT CATEGORY
 
@@ -297,7 +290,7 @@ price_hist_9 <- ggplot(amazon_dataset_9, aes(x=Product_Price)) + geom_histogram(
 print(price_hist_1 + ggtitle("Product Price, Home & Kitchen") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-22-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-22-1.png"  height="500" width="1440">
 
 ---
 
@@ -305,7 +298,7 @@ print(price_hist_1 + ggtitle("Product Price, Home & Kitchen") +labs(x = "Product
 print(price_hist_2 + ggtitle("Product Price, Health & Household") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-23-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-23-1.png"  height="500" width="1440">
 
 ---
 
@@ -313,7 +306,7 @@ print(price_hist_2 + ggtitle("Product Price, Health & Household") +labs(x = "Pro
 print(price_hist_3 + ggtitle("Product Price, Beauty & Personal Care") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-24-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-24-1.png"  height="500" width="1440">
 
 ---
 
@@ -321,7 +314,7 @@ print(price_hist_3 + ggtitle("Product Price, Beauty & Personal Care") +labs(x = 
 print(price_hist_4 + ggtitle("Product Price, Tools & Home Improvement") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-27-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-27-1.png"  height="500" width="1440">
 
 ---
 
@@ -329,7 +322,7 @@ print(price_hist_4 + ggtitle("Product Price, Tools & Home Improvement") +labs(x 
 print(price_hist_5 + ggtitle("Product Price, Toys & Games") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-28-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-28-1.png"  height="500" width="1440">
 
 ---
 
@@ -337,7 +330,7 @@ print(price_hist_5 + ggtitle("Product Price, Toys & Games") +labs(x = "Product P
 print(price_hist_6 + ggtitle("Product Price, Baby Products") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-29-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-29-1.png"  height="500" width="1440">
 
 ---
 
@@ -345,7 +338,7 @@ print(price_hist_6 + ggtitle("Product Price, Baby Products") +labs(x = "Product 
 print(price_hist_7 + ggtitle("Product Price, Office Products") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-30-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-30-1.png"  height="500" width="1440">
 
 ---
 
@@ -353,7 +346,7 @@ print(price_hist_7 + ggtitle("Product Price, Office Products") +labs(x = "Produc
 print(price_hist_8 + ggtitle("Product Price, Industrial & Scientific") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-31-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-31-1.png"  height="500" width="1440">
 
 ---
 
@@ -361,7 +354,7 @@ print(price_hist_8 + ggtitle("Product Price, Industrial & Scientific") +labs(x =
 print(price_hist_9 + ggtitle("Product Price, Clothing, Shoes & Jewelry") +labs(x = "Product Price", y = "Count"))
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-32-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-32-1.png"  height="500" width="1440">
 
 
 ## MESSY DATA ISSUE
@@ -374,7 +367,7 @@ penny_lines <- subset(amazon_dataset_1, amazon_dataset_1$Product_Price <= 0.01)
 str(penny_lines)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unname-chunk-33.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unname-chunk-33.png"  height="500" width="1440">
 
 ## MESSY DATA ISSUE
 
@@ -741,6 +734,7 @@ AFTER OBSERVING THE HISTOGRAMS AND BASE VALUES
 ## REMOVING VALUES
 
 - SUBSET -- REMOVAL OF MIN VALUES BASED ON BASE VALUES/HISTOGRAMS
+
 ```
 removal_threshold_min <- 4.99
 
@@ -902,35 +896,35 @@ price_hist_9 <- ggplot(amazon_dataset_9_removed_outliers, aes(x=Product_Price)) 
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-87-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-87-1.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-89-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-89-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-91-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-91-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-93-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-93-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-95-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-95-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-97-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-97-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-99-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-99-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-101-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-101-2.png"  height="500" width="1440">
 
 # PART 5 - NORMALIZING THE DATAFRAMES
 
@@ -1022,187 +1016,51 @@ se_ads_1 <- sd_ads_1/sqrt_count_ads1
 
 ## DF 1
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-105-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-105-1.png"  height="500" width="1440">
 
-## DF 1
-
-- Product Category        
-> Home & Kitchen
-- Mean                              
-> 1.35
-- Median                             
-> 1.3
-- Mode                                 
-> 1
-- Product Count                    
-> 10815
-- Variance                          
-> 0.13
-- Standard Deviation                
-> 0.36
-- Standard Error     
-> 0.00350016259798728
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_1.png"  height="60" width="790">
 
 ## DF 2
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-106-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-106-1.png"  height="500" width="1440">
 
-## DF 2
-
-- Product Category    
-> Health & Household
-- Mean                              
-> 1.35
-- Median                             
-> 1.3
-- Mode                              
-> 1.78
-- Product Count                     
-> 4034
-- Variance                         
-> 0.14
-- Standard Deviation                
-> 0.37
-- Standard Error     
-> 0.00589861043335116
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_2.png"  height="60" width="790">
 
 ## DF 3
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-107-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-107-1.png"  height="500" width="1440">
 
-## DF 3
-
-- Product Category   
-> Beauty & Personal Care
-- Mean                                 
-> 1.35
-- Median                                
-> 1.2
-- Mode                                    
-> 1
-- Product Count                        
-> 4499
-- Variance                              
-> 0.1
-- Standard Deviation                   
-> 0.32
-- Standard Error         
-> 0.0048123119459761
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_3.png"  height="60" width="790">
 
 ## DF 4
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-108-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-108-1.png"  height="500" width="1440">
 
-## DF 4
-
-- Product Category   
-> Tools & Home Improvement
-- Mean                                   
-> 1.35
-- Median                                 
-> 1.38
-- Mode                                      
-> 1
-- Product Count                          
-> 1356
-- Variance                                
-> 0.2
-- Standard Deviation                     
-> 0.44
-- Standard Error           
-> 0.0120494878343595
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_4.png"  height="60" width="790">
 
 ## DF 5
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-109-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-109-1.png"  height="500" width="1440">
 
-## DF 5
-
-- Product Category          
-> Toys & Games
-- Mean                              
-> 1.35
-- Median                            
-> 1.11
-- Mode                              
-> 1.11
-- Product Count                      
-> 445
-- Variance                          
-> 0.13
-- Standard Deviation                
-> 0.36
-- Standard Error     
-> 0.00350016259798728
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_5.png"  height="60" width="790">
 
 ## DF 6
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-110-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-110-1.png"  height="500" width="1440">
 
-## DF 6
-
-- Product Category        
-> Baby Products
-- Mean                             
-> 1.35
-- Median                            
-> 1.3
-- Mode                                
-> 1
-- Product Count                     
-> 508
-- Variance                         
-> 0.08
-- Standard Deviation               
-> 0.29
-- Standard Error     
-> 0.0129097738108929
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_6.png"  height="60" width="790">
 
 ## DF 7
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-111-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-111-1.png"  height="500" width="1440">
 
-## DF 7
-
-- Product Category      
-> Office Products
-- Mean                             
-> 1.35
-- Median                           
-> 1.11
-- Mode                                
-> 1
-- Product Count                     
-> 245
-- Variance                         
-> 0.06
-- Standard Deviation               
-> 0.24
-- Standard Error     
-> 0.0156168918806012
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_7.png"  height="60" width="790">
 
 ## DF 9
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-112-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-112-1.png"  height="500" width="1440">
 
-## DF 9
-
-- Product Category   
-> Clothing, Shoes & Jewelry
-- Mean                                    
-> 1.35
-- Median                                  
-> 1.23
-- Mode                                       
-> 1
-- Product Count                            
-> 164
-- Variance                                
-> 0.06
-- Standard Deviation                      
-> 0.25
-- Standard Error            
-> 0.0193625233105732
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\Final Project\EDA_9.png"  height="60" width="790">
 
 # PART B - CONFIDENCE INTERVAL/HYPOTHESIS TESTING
 
@@ -1332,9 +1190,9 @@ upper_bound_9_99  <- mean9_log + margin_error_9_99
 
 ## DATAFRAMES FOR ALL DATA
 
-<img src="EDA_STATS_HTML_files\figure-html\CI_95_dataframe.png"  height="222" width="870">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\CI_95_dataframe.png"  height="222" width="870">
 
-<img src="EDA_STATS_HTML_files\figure-html\CI_99_dataframe.png"  height="221" width="927">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\CI_99_dataframe.png"  height="221" width="927">
 
 
 ## CONFIDENCE INTERVAL PLOTS
@@ -1346,11 +1204,11 @@ CI_99_PLOT <- plotCI(x=CIs_ADS_99[,4],ui=CIs_ADS_99[,3],li=CIs_ADS_99[,2], main 
 
 ## CONFIDENCE INTERVAL PLOT -- 95% CONFIDENCE
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-142-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\\unnamed-chunk-142-1.png"  height="500" width="1440">
 
 ## CONFIDENCE INTERVAL PLOT -- 99% CONFIDENCE
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-142-2.png"  height= "500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-142-2.png"  height= "500" width="1440">
 
 
 ## MOVING FORWARD TO COMPARE IF THE DIFFERENCE IS STATISTICALLY SIGNIFICANT
@@ -1480,7 +1338,7 @@ product_rating_hist_1 <- ggplot(ads_1_df_norm_values, aes(x=Product_Rating)) +
                             geom_histogram(binwidth = 1, color = "white")
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-144-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-144-1.png"  height="500" width="1440">
 
 ## LOOKING AT COUNT OF EACH RATING
 
@@ -1490,7 +1348,7 @@ product_rating_1 <- ads_1_df_norm_values %>%
                       tally()
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-144-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-144-1.png"  height="500" width="1440">
 
 
 ## FILTERED OUT PRODUCT WITH NO REVIEWS
@@ -1516,15 +1374,15 @@ product_rating_hist_3_rvd <- ggplot(ads_3_df_reviewed, aes(x=Product_Rating)) +
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-147-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-147-1.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-147-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-147-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-147-3.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-147-3.png"  height="500" width="1440">
 
 
 ## NORMALIZE THE VALUES USING LOG10 AND LOOKED AT DENSITY OF PRODUCT RATING
@@ -1549,15 +1407,15 @@ ads_3_rating_log_density <- ggdensity(rating_normal_3,fill = "lightgray", title 
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-150-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-150-1.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-150-2.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-150-2.png"  height="500" width="1440">
 
 ---
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-150-3.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-150-3.png"  height="500" width="1440">
 
 ## RAN COORELATION COEFFICENT BETWEEN PRODUCT PRICE AND PRODUCT RATING
 
@@ -1693,11 +1551,11 @@ print(coe_2_1)
 
 ## ADS 1_1
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-159-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-159-1.png"  height="500" width="1440">
 
 ## ADS 1_1
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-160-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-160-1.png"  height="500" width="1440">
 
 ## ADS 1_1 COR.COE
 
@@ -1718,11 +1576,11 @@ print(coe_2_1)
 
 ## ADS 2_1
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-162-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-162-1.png"  height="500" width="1440">
 
 ## ADS 2_1
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-163-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-163-1.png"  height="500" width="1440">
 
 ## ADS 2_1 COR.COE
 
@@ -1748,7 +1606,7 @@ amazon_dataset_1_delim_bsr_rating <- amazon_dataset_1_delim_bsr_rating[which(ama
 plot(Product_Rating ~ BSR_1_VALUE, data = amazon_dataset_1_delim_bsr_rating)
 ```
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-177-1.png"  height="500" width="1440">
+<img src="G:\My Drive\1_SPRING 2021\2_STATISTICS AND ANALYSIS\images\unnamed-chunk-177-1.png"  height="500" width="1440">
 
 ## COR.COE BETWEEN PRODUCT RANK AND PRODUCT RATING
 
