@@ -277,7 +277,7 @@ min_max_8 <- c(min(amazon_dataset_8_vector), max(amazon_dataset_8_vector))
 min_max_9 <- c(min(amazon_dataset_9_vector), max(amazon_dataset_9_vector))
 ```
 
-## HISTOGRAMS FOR PRODUCT PRICE
+## HISTOGRAMS FOR PRODUCT PRICE - CODE
 
 ```
 price_hist_1 <- ggplot(amazon_dataset_1, aes(x=Product_Price)) + geom_histogram(binwidth = 50)
@@ -291,15 +291,13 @@ price_hist_8 <- ggplot(amazon_dataset_8, aes(x=Product_Price)) + geom_histogram(
 price_hist_9 <- ggplot(amazon_dataset_9, aes(x=Product_Price)) + geom_histogram(binwidth = 50)
 ```
 
----
+## INITIAL HISTOGRAMS
 
 ```
 print(price_hist_1 + ggtitle("Product Price, Home & Kitchen") +labs(x = "Product Price", y = "Count"))
 ```
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-22-1.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -311,15 +309,11 @@ print(price_hist_2 + ggtitle("Product Price, Health & Household") +labs(x = "Pro
 
 ---
 
----
-
 ```
 print(price_hist_3 + ggtitle("Product Price, Beauty & Personal Care") +labs(x = "Product Price", y = "Count"))
 ```
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-24-1.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -331,15 +325,11 @@ print(price_hist_4 + ggtitle("Product Price, Tools & Home Improvement") +labs(x 
 
 ---
 
----
-
 ```
 print(price_hist_5 + ggtitle("Product Price, Toys & Games") +labs(x = "Product Price", y = "Count"))
 ```
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-28-1.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -351,15 +341,11 @@ print(price_hist_6 + ggtitle("Product Price, Baby Products") +labs(x = "Product 
 
 ---
 
----
-
 ```
 print(price_hist_7 + ggtitle("Product Price, Office Products") +labs(x = "Product Price", y = "Count"))
 ```
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-30-1.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -371,15 +357,12 @@ print(price_hist_8 + ggtitle("Product Price, Industrial & Scientific") +labs(x =
 
 ---
 
----
-
 ```
 print(price_hist_9 + ggtitle("Product Price, Clothing, Shoes & Jewelry") +labs(x = "Product Price", y = "Count"))
 ```
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-32-1.png"  height="500" width="1440">
 
----
 
 ## MESSY DATA ISSUE
 
@@ -393,6 +376,8 @@ str(penny_lines)
 
 <img src="EDA_STATS_HTML_files\figure-html\unname-chunk-33.png"  height="500" width="1440">
 
+## MESSY DATA ISSUE
+
 - AFTER LOOKING AT THESE VALUES, I SAW THAT THE PRODUCT DESCRIPTION DID NOT MATCH UP WITH THE PRODUCT CATEGORY
 - I WAS CONCERNED THAT THIS MAY HAVE BEEN AN ISSUE THROUGHOUT THE DATASET, SO I DECIDED TO DO MORE EXTENSIVE CLEANING
 
@@ -401,9 +386,14 @@ str(penny_lines)
 ## EXPERIMENT PHASE
 
 - USED THE FIRST DATAFRAME TO TEST WHAT EDIT DISTANCE I WOULD NEED FROM AGREP IN ORDER TO HAVE THE HIGHEST THRESHOLD OF MATCHES WITHOUT TAKING ON THE ENTIRE DATAFRAME
+
 - DETERMINED THAT 0.75 WAS THE BEST EDIT DISTANCE AND THE WORKFLOW NEEDED
+
 - I CREATED A COLUMN FOR THE LAST CATEGORY VALUE FOR EACH DATASET IN EXCEL THEN FED IT BACK INTO R
+
 - AGREP PRODUCES A LIST OF MATCHES FOUND AT EACH INDEX
+
+## EXPERIMENT PHASE
 
 ```
 amazon_dataset_1_last_cat_value <- read_excel("G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALYSIS\\dirty datasets\\amazon_dataset_1_last_cat_value.xlsx")
@@ -444,6 +434,7 @@ write.csv(amazon_dataset_7, "G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALY
 write.csv(amazon_dataset_8, "G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALYSIS\\dirty datasets\\amazon_dataset_8.csv", row.names = FALSE)
 write.csv(amazon_dataset_9, "G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALYSIS\\dirty datasets\\amazon_dataset_9.csv", row.names = FALSE)
 ```
+## MOVING FORWARD WITH THE REST OF THE DATAFRAMES
 
 - IMPORTED DATAFRAMES WITH LAST CATEGORY VALUE COLUMN
 
@@ -452,7 +443,6 @@ setwd("G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALYSIS\\dirty datasets")
 getwd()
 all_files <- list.files(path = "G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND ANALYSIS\\dirty datasets", pattern = "*.xlsx")
 as.vector(all_files)
-
 amazon_dataset_2_lcv <- as.data.frame(lapply(all_files[1], read_xlsx))
 amazon_dataset_3_lcv <- as.data.frame(lapply(all_files[2], read_xlsx))
 amazon_dataset_4_lcv <- as.data.frame(lapply(all_files[3], read_xlsx))
@@ -466,9 +456,14 @@ amazon_dataset_9_lcv <- as.data.frame(lapply(all_files[8], read_xlsx))
 ## MATCHING FUNCTION FOR EACH DATAFRAME
 
 - I PERFORMED THE FOLLOWING MATCHES ON THE FOLLOWING CONTENTS
-> -Last Category Value to Product Description
-> -Last Category Value to Product Contents
-> -Product Category 1 to Bsr (product category ranking)
+
+> Last Category Value to Product Description
+
+> Last Category Value to Product Contents
+
+> Product Category 1 to Bsr (product category ranking)
+
+## MATCHING FUNCTION FOR EACH DATAFRAME
 
 ```
 match_list2_1 <- agrep(amazon_dataset_2_lcv$LAST_CAT_VALUE, amazon_dataset_2_lcv$Product_Description, ignore.case = TRUE, value = FALSE, max.distance = 0.75)
@@ -592,6 +587,7 @@ write.csv(amazon_dataset_9_lcv,"G:\\My Drive\\1_SPRING 2021\\2_STATISTICS AND AN
 ## POST MANUAL AUDIT
 
 - AFTER MANUAL AUDITING, I IMPORT THE AUDITED DATASETS BACK IN
+
 - I DETERMINED WHAT LINES NEEDED ATTENTION IF ALL THREE MATCHES RUN RETURNED NO AND DELETED THEM IF NEEDED
 
 ```
@@ -603,6 +599,8 @@ view(all_matched_cleaned_files)
 clean_files_full_path <- all_matched_cleaned_files
 clean_files_full_path <- paste0("C:\\Users\\ubore\\Desktop\\clean ds\\", all_matched_cleaned_files)
 ```
+
+## POST MANUAL AUDIT
 
 - CONVERTING IMPORTED EXCEL FILES TO DATA FRAMES
 
@@ -735,8 +733,12 @@ names(base_values_df_9) <- c("Product Category","Mean","Median","Mode","Min","Ma
 ## REMOVING VALUES
 
 AFTER OBSERVING THE HISTOGRAMS AND BASE VALUES
+
 - REMOVE ALL PRODUCTS BELOW 5 DOLLARS
+
 - MAXIMUM VALUES THAT DON'T REPRESENT THE CATEGORY BY EACH INDIVIDUAL CATEGORY
+
+## REMOVING VALUES
 
 - SUBSET -- REMOVAL OF MIN VALUES BASED ON BASE VALUES/HISTOGRAMS
 ```
@@ -753,7 +755,10 @@ amazon_dataset_8_removed_mins <- subset(amazon_dataset_8_match_price, amazon_dat
 amazon_dataset_9_removed_mins <- subset(amazon_dataset_9_match_price, amazon_dataset_9_match_price$Product_Price > removal_threshold_min)
 ```
 
-## SUBSET -- REMOVAL OF LARGE OUTLIER VALUES BASED ON BASE VALUES/HISTOGRAMS
+## REMOVING VALUES
+
+- SUBSET -- REMOVAL OF LARGE OUTLIER VALUES BASED ON BASE VALUES/HISTOGRAMS
+
 - REMOVED CATEGORY 8 (INDUSTRIAL AND SCIENTIFIC) IT IS THE MOST NON-NORMAL DF AND A VERTICAL I DON'T HAVE INTEREST IN EXPLORING FURTHER
 
 ```
@@ -901,12 +906,7 @@ price_hist_9 <- ggplot(amazon_dataset_9_removed_outliers, aes(x=Product_Price)) 
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-89-2.png"  height="500" width="1440">
-
----
-
 
 ---
 
@@ -914,11 +914,7 @@ price_hist_9 <- ggplot(amazon_dataset_9_removed_outliers, aes(x=Product_Price)) 
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-93-2.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -926,11 +922,7 @@ price_hist_9 <- ggplot(amazon_dataset_9_removed_outliers, aes(x=Product_Price)) 
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-97-2.png"  height="500" width="1440">
-
----
 
 ---
 
@@ -938,15 +930,13 @@ price_hist_9 <- ggplot(amazon_dataset_9_removed_outliers, aes(x=Product_Price)) 
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-101-2.png"  height="500" width="1440">
-
----
 
 # PART 5 - NORMALIZING THE DATAFRAMES
 
-## MOST OF THE DATAFRAMES ARE RIGHT SKEWED SO I NORMALIZED THE DATA USING LOG10 CALCULATIONS
+## NORMALIZING THE DATA USING LOG10
+
+- MOST OF THE DATAFRAMES ARE RIGHT SKEWED SO I NORMALIZED THE DATA USING LOG10 CALCULATIONS
 
 - FINDING SKEWNESS COEFFICENT
 
@@ -961,29 +951,23 @@ sc_7 <- skewness(amazon_dataset_7_removed_outliers$Product_Price)
 sc_9 <- skewness(amazon_dataset_9_removed_outliers$Product_Price)
 ```
 
-## SKEWNESS COEFFICENTS IN VECTOR
+- SKEWNESS COEFFICENTS IN VECTOR
 
 ```{
 skewness_coes <- as.vector(c(sc_1,sc_2,sc_3,sc_4,sc_5,sc_6,sc_7,sc_9))
 names(skewness_coes) <- c("df1","df2","df3","df4","df5","df6","df7","df9")
 ```
 
-- df1
->-5.452039
-- df2
->-8.403301 
-- df3
->-3.684091
-- df4
->-3.559418
-- df5
->-1.524238 
-- df6
->-4.145838
-- df7
->-3.893088 
-- df9
->-1.906445
+## SKEWNESS COEFFICENTS
+
+- df1 - 5.452039
+- df2 - 8.403301 
+- df3 - 3.684091
+- df4 - 3.559418
+- df5 - 1.524238 
+- df6 - 4.145838
+- df7 - 3.893088 
+- df9 - 1.906445
 
 ## PERFORMING LOG10 NORMALIZATION ON PRODUCT PRICE FOR EACH DATAFRAME
 
@@ -1018,7 +1002,8 @@ names(ads_9_log) <- "Product_Price"
 
 ## BASE VALUES AFTER NORMALIZATION FOR EACH DATAFRAME, INCLUDING VARIANCE, STANDARD DEVIATION AND STANDARD ERROR
 
-- DF1
+- EXAMPLE -- CALCULATIONS AND CREATNG DENSITY PLOT - DF1
+
 ```
 mean1_log <- mean(ads_1_log$Product_Price)
 median1_log <- median(ads_1_log$Product_Price)
@@ -1032,111 +1017,6 @@ sd_ads_1 <- sd(ads_1_log$Product_Price)
 sqrt_count_ads1 <- sqrt(count1_log)
 se_ads_1 <- sd_ads_1/sqrt_count_ads1
 ```
-- DF2
-```
-mean2_log <- mean(ads_2_log$Product_Price)
-median2_log <- median(ads_2_log$Product_Price)
-mode2_log <- getmode(ads_2_log$Product_Price)
-count2_log <- as.numeric(nrow(ads_2_log))
-
-ads_2_log_density <- ggdensity(ads_2_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Health & Household, Normalized") +
-                     stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_2 <- var(ads_2_log$Product_Price)
-sd_ads_2 <- sd(ads_2_log$Product_Price)
-sqrt_count_ads2 <- sqrt(count2_log)
-se_ads_2 <- sd_ads_2/sqrt_count_ads2
-```
-- DF3
-```
-mean3_log <- mean(ads_3_log$Product_Price)
-median3_log <- median(ads_3_log$Product_Price)
-mode3_log <- getmode(ads_3_log$Product_Price)
-count3_log <- as.numeric(nrow(ads_3_log))
-
-ads_3_log_density <- ggdensity(ads_3_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Beauty & Personal Care, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_3 <- var(ads_3_log$Product_Price)
-sd_ads_3 <- sd(ads_3_log$Product_Price)
-sqrt_count_ads3 <- sqrt(count3_log)
-se_ads_3 <- sd_ads_3/sqrt_count_ads3
-```
-- DF4
-```
-mean4_log <- mean(ads_4_log$Product_Price)
-median4_log <- median(ads_4_log$Product_Price)
-mode4_log <- getmode(ads_4_log$Product_Price)
-count4_log <- as.numeric(nrow(ads_4_log))
-
-ads_4_log_density <- ggdensity(ads_4_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Tools & Home Improvement, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_4 <- var(ads_4_log$Product_Price)
-sd_ads_4 <- sd(ads_4_log$Product_Price)
-sqrt_count_ads4 <- sqrt(count4_log)
-se_ads_4 <- sd_ads_4/sqrt_count_ads4
-```
-- DF5
-```
-mean5_log <- mean(ads_5_log$Product_Price)
-median5_log <- median(ads_5_log$Product_Price)
-mode5_log <- getmode(ads_5_log$Product_Price)
-count5_log <- as.numeric(nrow(ads_5_log))
-
-ads_5_log_density <- ggdensity(ads_5_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Toys & Games, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_5 <- var(ads_1_log$Product_Price)
-sd_ads_5 <- sd(ads_1_log$Product_Price)
-sqrt_count_ads5 <- sqrt(count1_log)
-se_ads_5 <- sd_ads_5/sqrt_count_ads5
-```
-- DF6
-```
-mean6_log <- mean(ads_6_log$Product_Price)
-median6_log <- median(ads_6_log$Product_Price)
-mode6_log <- getmode(ads_6_log$Product_Price)
-count6_log <- as.numeric(nrow(ads_6_log))
-
-ads_6_log_density <- ggdensity(ads_6_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Baby Products, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_6 <- var(ads_6_log$Product_Price)
-sd_ads_6 <- sd(ads_6_log$Product_Price)
-sqrt_count_ads6 <- sqrt(count6_log)
-se_ads_6 <- sd_ads_6/sqrt_count_ads6
-```
-- DF7
-```
-mean7_log <- mean(ads_7_log$Product_Price)
-median7_log <- median(ads_7_log$Product_Price)
-mode7_log <- getmode(ads_7_log$Product_Price)
-count7_log <- as.numeric(nrow(ads_7_log))
-
-ads_7_log_density <- ggdensity(ads_7_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Office Products, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_7 <- var(ads_7_log$Product_Price)
-sd_ads_7 <- sd(ads_7_log$Product_Price)
-sqrt_count_ads7 <- sqrt(count7_log)
-se_ads_7 <- sd_ads_7/sqrt_count_ads7
-```
-- DF9
-```
-mean9_log <- mean(ads_9_log$Product_Price)
-median9_log <- median(ads_9_log$Product_Price)
-mode9_log <- getmode(ads_9_log$Product_Price)
-count9_log <- as.numeric(nrow(ads_9_log))
-
-ads_9_log_density <- ggdensity(ads_9_log, x = "Product_Price", fill = "lightgray", title = "Product Price, Clothing, Shoes & Jewelry, Normalized") +
-  stat_overlay_normal_density(color = "red", linetype = "dashed")
-
-var_ads_9 <- var(ads_9_log$Product_Price)
-sd_ads_9 <- sd(ads_9_log$Product_Price)
-sqrt_count_ads9 <- sqrt(count9_log)
-se_ads_9 <- sd_ads_9/sqrt_count_ads9
-```
 
 # DENSITY CHARTS AND EDA VALUES
 
@@ -1146,14 +1026,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 1
 
-- Product Category        Home & Kitchen
-- Mean                              1.35
-- Median                             1.3
-- Mode                                 1
-- Product Count                    10815
-- Variance                          0.13
-- Standard Deviation                0.36
-- Standard Error     0.00350016259798728
+- Product Category        
+> Home & Kitchen
+- Mean                              
+> 1.35
+- Median                             
+> 1.3
+- Mode                                 
+> 1
+- Product Count                    
+> 10815
+- Variance                          
+> 0.13
+- Standard Deviation                
+> 0.36
+- Standard Error     
+> 0.00350016259798728
 
 ## DF 2
 
@@ -1161,14 +1049,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 2
 
-- Product Category    Health & Household
-- Mean                              1.35
-- Median                             1.3
-- Mode                              1.78
-- Product Count                     4034
-- Variance                          0.14
-- Standard Deviation                0.37
-- Standard Error     0.00589861043335116
+- Product Category    
+> Health & Household
+- Mean                              
+> 1.35
+- Median                             
+> 1.3
+- Mode                              
+> 1.78
+- Product Count                     
+> 4034
+- Variance                         
+> 0.14
+- Standard Deviation                
+> 0.37
+- Standard Error     
+> 0.00589861043335116
 
 ## DF 3
 
@@ -1176,14 +1072,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 3
 
-- Product Category   Beauty & Personal Care
-- Mean                                 1.35
-- Median                                1.2
-- Mode                                    1
-- Product Count                        4499
-- Variance                              0.1
-- Standard Deviation                   0.32
-- Standard Error         0.0048123119459761
+- Product Category   
+> Beauty & Personal Care
+- Mean                                 
+> 1.35
+- Median                                
+> 1.2
+- Mode                                    
+> 1
+- Product Count                        
+> 4499
+- Variance                              
+> 0.1
+- Standard Deviation                   
+> 0.32
+- Standard Error         
+> 0.0048123119459761
 
 ## DF 4
 
@@ -1191,14 +1095,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 4
 
-- Product Category   Tools & Home Improvement
-- Mean                                   1.35
-- Median                                 1.38
-- Mode                                      1
-- Product Count                          1356
-- Variance                                0.2
-- Standard Deviation                     0.44
-- Standard Error           0.0120494878343595
+- Product Category   
+> Tools & Home Improvement
+- Mean                                   
+> 1.35
+- Median                                 
+> 1.38
+- Mode                                      
+> 1
+- Product Count                          
+> 1356
+- Variance                                
+> 0.2
+- Standard Deviation                     
+> 0.44
+- Standard Error           
+> 0.0120494878343595
 
 ## DF 5
 
@@ -1206,14 +1118,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 5
 
-- Product Category          Toys & Games
-- Mean                              1.35
-- Median                            1.11
-- Mode                              1.11
-- Product Count                      445
-- Variance                          0.13
-- Standard Deviation                0.36
-- Standard Error     0.00350016259798728
+- Product Category          
+> Toys & Games
+- Mean                              
+> 1.35
+- Median                            
+> 1.11
+- Mode                              
+> 1.11
+- Product Count                      
+> 445
+- Variance                          
+> 0.13
+- Standard Deviation                
+> 0.36
+- Standard Error     
+> 0.00350016259798728
 
 ## DF 6
 
@@ -1221,14 +1141,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 6
 
-- Product Category        Baby Products
-- Mean                             1.35
-- Median                            1.3
-- Mode                                1
-- Product Count                     508
-- Variance                         0.08
-- Standard Deviation               0.29
-- Standard Error     0.0129097738108929
+- Product Category        
+> Baby Products
+- Mean                             
+> 1.35
+- Median                            
+> 1.3
+- Mode                                
+> 1
+- Product Count                     
+> 508
+- Variance                         
+> 0.08
+- Standard Deviation               
+> 0.29
+- Standard Error     
+> 0.0129097738108929
 
 ## DF 7
 
@@ -1236,14 +1164,22 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 7
 
-- Product Category      Office Products
-- Mean                             1.35
-- Median                           1.11
-- Mode                                1
-- Product Count                     245
-- Variance                         0.06
-- Standard Deviation               0.24
-- Standard Error     0.0156168918806012
+- Product Category      
+> Office Products
+- Mean                             
+> 1.35
+- Median                           
+> 1.11
+- Mode                                
+> 1
+- Product Count                     
+> 245
+- Variance                         
+> 0.06
+- Standard Deviation               
+> 0.24
+- Standard Error     
+> 0.0156168918806012
 
 ## DF 9
 
@@ -1251,29 +1187,42 @@ se_ads_9 <- sd_ads_9/sqrt_count_ads9
 
 ## DF 9
 
-- Product Category   Clothing, Shoes & Jewelry
-- Mean                                    1.35
-- Median                                  1.23
-- Mode                                       1
-- Product Count                            164
-- Variance                                0.06
-- Standard Deviation                      0.25
-- Standard Error            0.0193625233105732
+- Product Category   
+> Clothing, Shoes & Jewelry
+- Mean                                    
+> 1.35
+- Median                                  
+> 1.23
+- Mode                                       
+> 1
+- Product Count                            
+> 164
+- Variance                                
+> 0.06
+- Standard Deviation                      
+> 0.25
+- Standard Error            
+> 0.0193625233105732
 
 # PART B - CONFIDENCE INTERVAL/HYPOTHESIS TESTING
 
 # PART 6 - PERFORMING CONFIDENCE INTERVAL TESTING
 
-- DETERMINE HOW STATISTICALLY CLOSE THE SAMPLE MEAN IS TO THE POPULATION MEAN AND WHETHER OR NOT THE DIFFERENCE BETWEEN THE MEANS OF EACH PRODUCT CATEGORY IS STATISTICALLY SIGNIFICANT
+- DETERMINE HOW STATISTICALLY CLOSE THE SAMPLE MEAN IS TO THE POPULATION MEAN
+
+- WHETHER OR NOT THE DIFFERENCE BETWEEN THE MEANS OF EACH PRODUCT CATEGORY IS STATISTICALLY SIGNIFICANT
 
 # VALUES OF CONFIDENCE INTERVAL OF SAMPLE MEAN OF PRODUCT PRICE, 95/99% CONFIDENCE
 
 ## ALPHA
+
 ```
 alpha <- 0.05
 alpha_99 <- 0.01
 ```
+
 ## DEGREES OF FREEDOM
+
 ```
 degrees_freedom_1 <- count1_log - 1
 degrees_freedom_2 <- count2_log - 1
@@ -1284,7 +1233,9 @@ degrees_freedom_6 <- count6_log - 1
 degrees_freedom_7 <- count7_log - 1
 degrees_freedom_9 <- count9_log - 1
 ```
+
 ## T-SCORE
+
 ```
 t_score_1 <- qt(p=alpha/2, df=degrees_freedom_1, lower.tail = FALSE)
 t_score_2 <- qt(p=alpha/2, df=degrees_freedom_2, lower.tail = FALSE)
@@ -1304,7 +1255,9 @@ t_score_6_99 <- qt(p=alpha_99/2, df=degrees_freedom_6, lower.tail = FALSE)
 t_score_7_99 <- qt(p=alpha_99/2, df=degrees_freedom_7, lower.tail = FALSE)
 t_score_9_99 <- qt(p=alpha_99/2, df=degrees_freedom_9, lower.tail = FALSE)
 ```
+
 ## MARGIN OF ERROR
+
 ```
 margin_error_1 <- t_score_1 * se_ads_1
 margin_error_2 <- t_score_2 * se_ads_2
@@ -1325,7 +1278,7 @@ margin_error_7_99  <- t_score_7_99  * se_ads_7
 margin_error_9_99  <- t_score_9_99  * se_ads_9
 ```
 
-##LOWER/UPPER BOUNDS
+## LOWER/UPPER BOUNDS
 
 ```
 lower_bound_1 <- mean1_log - margin_error_1
@@ -1376,6 +1329,7 @@ upper_bound_7_99  <- mean7_log + margin_error_7_99
 lower_bound_9_99  <- mean9_log - margin_error_9_99 
 upper_bound_9_99  <- mean9_log + margin_error_9_99 
 ```
+
 ## DATAFRAMES FOR ALL DATA
 
 <img src="EDA_STATS_HTML_files\figure-html\CI_95_dataframe.png"  height="222" width="870">
@@ -1392,18 +1346,22 @@ CI_99_PLOT <- plotCI(x=CIs_ADS_99[,4],ui=CIs_ADS_99[,3],li=CIs_ADS_99[,2], main 
 
 ## CONFIDENCE INTERVAL PLOT -- 95% CONFIDENCE
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-139-1.png"  height="400" width="870">
+<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-142-1.png"  height="500" width="1440">
 
 ## CONFIDENCE INTERVAL PLOT -- 99% CONFIDENCE
 
-<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-139-2.png"  height="400" width="927">
+<img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-142-2.png"  height= "500" width="1440">
 
 
-## MOVE FORWARD WITH THE DATAFRAMES THAT HAVE THE SMALLEST GAP BETWEEN THE LOWER/UPPER BOUND FOR THE MEAN WITH THE HIGHEST COUNTS, TO COMPARE IF THE DIFFERENCE IS STATISTICALLY SIGNIFICANT
+## MOVING FORWARD TO COMPARE IF THE DIFFERENCE IS STATISTICALLY SIGNIFICANT
 
-> -DF1 
-> -DF2 
-> -DF3
+- THE DATAFRAMES THAT HAVE THE SMALLEST GAP BETWEEN THE LOWER/UPPER BOUND FOR THE MEAN
+
+- THE DATAFRAMES THAT HAVE THE HIGHEST PRODUCT COUNTS
+
+> DF1 
+> DF2 
+> DF3
 
 # BOUND NORMAL VALUES TO DFS
 
@@ -1431,7 +1389,7 @@ var_test_2and3 <- var.test(ads_2_log_unlist ,ads_3_log_unlist, alternative = "tw
 var_test_1and3 <- var.test(ads_1_log_unlist ,ads_3_log_unlist, alternative = "two.sided")
 ```
 
-## F TEST VALUES
+# F TEST VALUES
 
 ## VARIANCE MEAN 1 AND MEAN 2
 
@@ -1444,7 +1402,7 @@ alternative hypothesis: true ratio of variances is not equal to 1
  0.8966503 0.9932285
 sample estimates:
 ratio of variances 
-         0.9439905 
+0.9439905 
 
 ## VARIANCE MEAN 2 AND MEAN 3
 
@@ -1473,15 +1431,19 @@ ratio of variances
 1.347137 
 
 
-## THERE IS A SIGNIFICANT DIFFERENCE BETWEEN THE VARIANCE OF THE TWO POPULATION MEANS between 1&2, 1&3, and 2&3
+## THERE IS A SIGNIFICANT DIFFERENCE BETWEEN THE VARIANCE OF THE POPULATION MEANS
+
+- THE P VALUE FOR ALL TESTS ARE GREATER THAN ALPHA (0.05)
 
 - STUDENT T TEST CAN NOT BE PERFORMED
 
 ## PERFORM WELCH'S T TEST INSTEAD
 
-- H-NULL  true difference in means is = 0
-- H-ALT   true difference in means is =/= 0
-- Alpha is 0.05
+- H-NULL  TRUE DIFFERENCE IN MEANS = 0
+
+- H-ALT   TRUE DIFFERENCE IN MEANS =/= 0
+
+- ALPHA IS 0.05
 
 ```
 welch_means1and2 <- t.test(ads_1_log_unlist, ads_2_log_unlist)
@@ -1493,16 +1455,21 @@ print(welch_means2and3$p.value)
 print(welch_means1and3$p.value)
 ```
 
+## PERFORM WELCH'S T TEST INSTEAD
+
 [1] 9.23992e-05
+
 [1] 7.512562e-55
+
 [1] 3.53086e-54
 
-- P.VALUE FOR MEANS 1 AND 2, MEANS 2 AND 3, AND MEANS 1,3 are > THAN ALPHA
+- P.VALUE FOR MEANS 1 AND 2, MEANS 2 AND 3, AND MEANS 1,3 ARE ALL > ALPHA
 
 ## WE FAIL TO REJECT THE NULL HYPOTHESIS
 
-- There is probably no statistically significant difference between the means
-- THere is probably no mean of product price that is more profitable than the other means
+- THERE IS PROBABLY NO SIGNIFICANT DIFFERENCE BETWEEN THE MEANS
+
+- THERE IS PROBABLY NO MEAN OF PRODUCT PRICE THAT IS MORE PROFITABLE THAN THE OTHER MEANS
 
 # PART 7 - IS THERE A CORRELATION BETWEEN PRODUCT RATING AND PRODUCT PRICE?
 
@@ -1553,17 +1520,12 @@ product_rating_hist_3_rvd <- ggplot(ads_3_df_reviewed, aes(x=Product_Rating)) +
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-147-2.png"  height="500" width="1440">
-
----
 
 ---
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-147-3.png"  height="500" width="1440">
 
----
 
 ## NORMALIZE THE VALUES USING LOG10 AND LOOKED AT DENSITY OF PRODUCT RATING
 
@@ -1591,17 +1553,11 @@ ads_3_rating_log_density <- ggdensity(rating_normal_3,fill = "lightgray", title 
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-150-2.png"  height="500" width="1440">
 
 ---
 
----
-
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-150-3.png"  height="500" width="1440">
-
----
 
 ## RAN COORELATION COEFFICENT BETWEEN PRODUCT PRICE AND PRODUCT RATING
 
@@ -1624,20 +1580,24 @@ print(cor_ads_3_norm)
 
 ## COORELATION COEFFICENTS BETWEEN PRODUCT PRICE AND PRODUCT RATING
 
--COR ADS 1
-[1] -0.03021033
-[1] -0.01678979
+COR ADS 1 (BOTH REGULAR AND NORMALIZED VALUES)
 
--COR ADS 2
-[1] -0.0418366
-[1] -0.03605427
+> [1] -0.03021033
+> [1] -0.01678979
 
--COR ADS 3
-[1] -0.02456391
-[1] 0.006036672
+COR ADS 2 (BOTH REGULAR AND NORMALIZED VALUES)
 
-> -COORELATION COEEFICENT SHOWS NO/NEGLIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RATING
+> [1] -0.0418366
+> [1] -0.03605427
 
+COR ADS 3 (BOTH REGULAR AND NORMALIZED VALUES)
+
+> [1] -0.02456391
+> [1] 0.006036672
+
+## COORELATION COEFFICENTS BETWEEN PRODUCT PRICE AND PRODUCT RATING
+
+- COORELATION COEEFICENT SHOWS NO/NEGLIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RATING
 
 # PART 9 - IS THERE A CORRELATION BETWEEN PRODUCT PRICE AND PRODUCT RANKING?
 
@@ -1730,6 +1690,7 @@ coe_2_1 <- cor(amazon_dataset_2_delim_bsr_1st$Product_Price, amazon_dataset_2_de
 
 print(coe_2_1)
 ```
+
 ## ADS 1_1
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-159-1.png"  height="500" width="1440">
@@ -1742,7 +1703,7 @@ print(coe_2_1)
 
 [1] 0.1473879
 
-> - NO/NEGLIGIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RANK IN DF1
+> NO/NEGLIGIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RANK IN DF1
 
 ## ADS 2_1
 
@@ -1754,6 +1715,7 @@ product_rank_dot_2_1 <- plot(Product_Price ~ BSR_1_VALUE, data = amazon_dataset_
 coe_2_1 <- cor(amazon_dataset_2_delim_bsr_1st$Product_Price, amazon_dataset_2_delim_bsr_1st$BSR_1_VALUE)
 print(coe_2_1)
 ```
+
 ## ADS 2_1
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-162-1.png"  height="500" width="1440">
@@ -1766,7 +1728,7 @@ print(coe_2_1)
 
 [1] 0.1016072
 
-> - NO/NEGLIGIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RANK IN DF2
+> NO/NEGLIGIBLE RELATIONSHIP BETWEEN PRODUCT PRICE AND PRODUCT RANK IN DF2
 
 # IT IS SAFE TO ASSUME THAT WITHIN THE ENTIRE DATASET, THERE IS NO RELATIONSHIP BETWEEN PRODUCT RANK AND PRODUCT PRICE
 
@@ -1785,8 +1747,6 @@ amazon_dataset_1_delim_bsr_rating <- amazon_dataset_1_delim_bsr_rating[which(ama
 ```
 plot(Product_Rating ~ BSR_1_VALUE, data = amazon_dataset_1_delim_bsr_rating)
 ```
-
-## SCATTER PLOT
 
 <img src="EDA_STATS_HTML_files\figure-html\unnamed-chunk-177-1.png"  height="500" width="1440">
 
