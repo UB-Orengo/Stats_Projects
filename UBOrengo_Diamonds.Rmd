@@ -1,0 +1,157 @@
+---
+title: "Exploratory Analysis - Diamonds Tibble"
+author: "UB Orengo"
+date: "5/6/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# LIBRARIES USED
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(stats)
+library(scales)
+```
+
+# DATASET EXPLORED
+
+```{r}
+head(diamonds)
+```
+
+# EXPLORING X Y Z VALUES
+
+## INTIAL HISTOGRAMS
+
+```{r}
+diamonds_hist <- ggplot(diamonds) + 
+                    geom_histogram(mapping = aes(x = x), binwidth = 1)
+```
+
+### This histogram for the x value has a bit of a left skew
+
+```{r}
+diamonds_hist2 <- ggplot(diamonds) + 
+                    geom_histogram(mapping = aes(x = y), binwidth = 1)
+
+diamonds_hist3 <- ggplot(diamonds) + 
+                    geom_histogram(mapping = aes(x = z), binwidth = 1)
+print(diamonds_hist)
+print(diamonds_hist2)
+print(diamonds_hist3)
+```
+
+### We are unable to see the distribution properly of the y and z values because of outlier values
+
+```{r}
+print(min(diamonds$y))
+print(max(diamonds$y))
+
+print(min(diamonds$z))
+print(max(diamonds$z))
+```
+### After looking at the max/min values and observing the histograms, we create a subset of the current table without the outliers
+
+```{r}
+out_diamond_y <- diamonds[which(diamonds[,9]>10),]
+
+out_diamond_z <- diamonds[which(diamonds[,10]>9),]
+
+diamonds_subset_y <- subset(diamonds, diamonds$y <= 11)
+
+diamonds_subset_z <- subset(diamonds, diamonds$z <= 8)
+```
+
+## SUBSET GRAPHS -- REMOVED OUTLIERS
+
+### We print new histograms, which are both semi-normally distributed, with new bins
+
+```{r}
+diamonds_hist4 <- ggplot(diamonds_subset_y) + 
+  geom_histogram(mapping = aes(x = y), binwidth = 1)
+
+diamonds_hist5 <- ggplot(diamonds_subset_z) + 
+  geom_histogram(mapping = aes(x = z), binwidth = .5)
+
+print(diamonds_hist4)
+print(diamonds_hist5)
+```
+
+# EXPLORING PRICE OF DIAMONDS
+
+## Histogram of Distribution of Price of Diamonds
+
+```{r}
+diamonds_price <- ggplot(diamonds) +
+                    geom_histogram(mapping = aes(x = price), binwidth = 100, color="white")
+
+print(min(diamonds$price))
+print(max(diamonds$price))
+
+print(diamonds_price)
+```
+### It seems that a large portion of the diamonds in the dataset are between the first 10 bins, which would be 0-1000$
+
+# COMPARISION OF .99 CARAT DIAMONDS TO 1 CARAT DIAMONDS
+
+```{r}
+carat_count <- diamonds[which(diamonds[,1] == 0.99),]
+view(carat_count)
+```
+
+### 23 rows in diamonds$carat = 0.99, there are 23 diamonds in the dataset that equal .99 carats
+
+```{r}
+carat_count2 <- diamonds[which(diamonds[,1] == 1),]
+view(carat_count2)
+```
+
+### 1,558 rows in diamonds$carat = 1. there are 1,558 diamonds in the dataset that equal 1 carat. 
+
+### The difference may be attributed to values being rounded up to be able to price the diamonds at 1 carat, as opposed to .99 carats.
+
+## Summary Table -- Average Price by Carat
+
+```{r}
+avg_price_by_carat <- diamonds %>%
+                        group_by(carat) %>%
+                        summarize(avg_price = mean(price))
+
+price_99_carat <- avg_price_by_carat[which(avg_price_by_carat[,1] == .99),]
+price_1_carat <- avg_price_by_carat[which(avg_price_by_carat[,1] == 1),]
+
+print(avg_price_by_carat)
+print(price_99_carat)
+print(price_1_carat)
+```
+
+## Line Plot of Average Price by Number of Carats
+
+```{r}
+carat_plot <- ggplot(data = avg_price_by_carat, mapping = aes(x = carat, y = avg_price)) +
+                  geom_line() +
+                  geom_point() +
+                  geom_smooth() +
+                  ggtitle("Average Price By Carat") +
+                  xlab("Number of Carats") + ylab("Average Price")
+
+print(carat_plot) + ggtitle("Average Price By Carat") + xlab("Number of Carats") + ylab("Average Price")
+```
+
+### You can see a distinct slope between .99 carat and 1 carat
+
+```{r}
+print(price_99_carat)
+print(price_1_carat)
+price_diff <- price_1_carat[,2]-price_99_carat[,2]                   
+print(price_diff)
+```
+
+### There is an over 800$ difference between the average price of a .99 carat diamond and a 1 carat diamond
